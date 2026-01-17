@@ -170,7 +170,6 @@ import { AgentWebFetchTool } from "../ui/agent-web-fetch-tool"
 import { AgentWebSearchCollapsible } from "../ui/agent-web-search-collapsible"
 import { AgentsHeaderControls } from "../ui/agents-header-controls"
 import { ChatTitleEditor } from "../ui/chat-title-editor"
-import { McpServersIndicator } from "../ui/mcp-servers-indicator"
 import { MobileChatHeader } from "../ui/mobile-chat-header"
 import { PrStatusBar } from "../ui/pr-status-bar"
 import { SubChatSelector } from "../ui/sub-chat-selector"
@@ -2430,13 +2429,12 @@ function ChatViewInner({
                         </motion.div>
                       )}
                       {/* User message text - sticky WITHIN this group */}
+                      {/* z-10 ensures user message stays above scrolling content (tool calls, buttons) */}
                       <div
                         data-user-message-id={msg.id}
                         className={cn(
                           "[&>div]:!mb-4 pointer-events-auto",
-                          // Sticky within the group container
-                          // No z-index here to avoid blocking dropdowns/tooltips
-                          "sticky",
+                          "sticky z-10",
                           isMobile
                             ? CHAT_LAYOUT.stickyTopMobile
                             : isSubChatsSidebarOpen
@@ -4907,8 +4905,6 @@ export function ChatView({
                         isDiffSidebarOpen={isDiffSidebarOpen}
                         diffStats={diffStats}
                       />
-                      {/* MCP Servers indicator */}
-                      <McpServersIndicator projectPath={originalProjectPath} />
                     </>
                   )}
                 </div>

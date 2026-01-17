@@ -498,12 +498,8 @@ export const AgentTodoTool = memo(function AgentTodoTool({
       } : undefined}
     >
       {/* TOP BLOCK - Plan title with expand/collapse button */}
-      {/* z-[9] - UNDER user message (user message has z-10) */}
       <div
-        className={cn(
-          "rounded-t-lg border border-b-0 border-border bg-muted/30 px-2.5 py-1.5 cursor-pointer hover:bg-muted/40 transition-colors duration-150",
-          isCreationToolCall && "relative z-[9]"
-        )}
+        className="rounded-t-lg border border-b-0 border-border bg-muted/30 px-2.5 py-1.5 cursor-pointer hover:bg-muted/40 transition-colors duration-150"
         onClick={() => setIsExpanded(!isExpanded)}
         role="button"
         aria-expanded={isExpanded}
@@ -543,11 +539,7 @@ export const AgentTodoTool = memo(function AgentTodoTool({
       </div>
 
       {/* BOTTOM BLOCK - Current task + progress (expandable) */}
-      {/* z-20 - ABOVE user message shadow */}
-      <div className={cn(
-        "rounded-b-lg border border-border bg-muted/20 shadow-xl shadow-background",
-        isCreationToolCall && "relative z-20"
-      )}>
+      <div className="rounded-b-lg border border-border bg-muted/20 shadow-xl shadow-background">
         {/* Collapsed view - progress circle + current task + count */}
         {!isExpanded && (
           <div
