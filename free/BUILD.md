@@ -21,12 +21,10 @@ This document describes the automated build process for creating free macOS rele
 ### 1. Pull from upstream
 
 ```bash
-# Set the upstream tag you want to build
-TAG=v0.0.27
-
+# Example: building from tag v0.0.27
 git fetch upstream
-git checkout "$TAG"
-git rebase "upstream/$TAG"
+git checkout v0.0.27
+git rebase upstream/v0.0.27
 ```
 
 **Why rebase?** Your local changes are typically in the `free/` directory only. Rebase keeps your commits on top of the upstream tag.
@@ -67,20 +65,14 @@ bun run package:mac
 
 ### 6. Create release on origin
 
-Get the version from `package.json`:
+Check the version in `package.json` (should match the upstream tag).
 
 ```bash
-VERSION=$(node -p "require('./package.json').version")
-echo $VERSION  # Should match upstream tag, e.g., 0.0.27
-```
-
-Create the GitHub release on origin (note: tag uses `v` prefix):
-
-```bash
-gh release create "v$VERSION" \
+# Example: for v0.0.27
+gh release create v0.0.27 \
   --repo AkaraChen/1code-free \
-  --title "1Code v$VERSION" \
-  --notes "Release v$VERSION"
+  --title "1Code v0.0.27" \
+  --notes "Release v0.0.27"
 ```
 
 ### 7. Upload DMG files
@@ -94,5 +86,6 @@ ls release/
 Upload all `.dmg` files to the GitHub release:
 
 ```bash
-gh release upload "v$VERSION" release/1Code-$VERSION-arm64.dmg release/1Code-$VERSION.dmg --repo AkaraChen/1code-free
+# Example: for v0.0.27
+gh release upload v0.0.27 release/1Code-0.0.27-arm64.dmg release/1Code-0.0.27.dmg --repo AkaraChen/1code-free
 ```
