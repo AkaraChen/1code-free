@@ -23,11 +23,14 @@ This document describes the automated build process for creating free macOS rele
 ```bash
 # Example: building from tag v0.0.27
 git fetch upstream
+git stash  # stash bun.lock changes if needed
 git checkout v0.0.27
-git rebase upstream/v0.0.27
+git checkout main && git rebase v0.0.27
 ```
 
 **Why rebase?** Your local changes are typically in the `free/` directory only. Rebase keeps your commits on top of the upstream tag.
+
+**Note**: `bun.lock` may have local changes after `bun install`. Stash or discard these changes before checkout — do not commit them.
 
 ### 2. Install dependencies
 
