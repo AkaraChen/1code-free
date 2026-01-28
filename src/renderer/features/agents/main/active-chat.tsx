@@ -3924,12 +3924,14 @@ const ChatViewInner = memo(function ChatViewInner({
   return (
     <SearchHighlightProvider>
       <div className="flex flex-col flex-1 min-h-0 relative">
-        {/* Text selection popover for adding text to context */}
-        <TextSelectionPopover
-          onAddToContext={addTextContext}
-          onQuickComment={handleQuickComment}
-          onFocusInput={handleFocusInput}
-        />
+        {/* Text selection popover for adding text to context - only render for active tab to prevent portaled popovers from inactive tabs capturing clicks */}
+        {isActive && (
+          <TextSelectionPopover
+            onAddToContext={addTextContext}
+            onQuickComment={handleQuickComment}
+            onFocusInput={handleFocusInput}
+          />
+        )}
 
         {/* Quick comment input */}
         {quickCommentState && (
